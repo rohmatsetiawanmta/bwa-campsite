@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,9 @@ Route::get('success-checkout', function () {
     return view('success-checkout');
 })->name('success-checkout');
 
+// Socialite route
+Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
+Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -37,4 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
