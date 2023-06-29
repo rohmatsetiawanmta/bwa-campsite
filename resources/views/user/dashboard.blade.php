@@ -41,7 +41,7 @@
                                 </td>
                                 <td>
                                     <a href="https://wa.me/6281297125253?text=Hi, saya ingin bertanya tentang kelas {{ $checkout->Camp->title }}. Boleh dibantu?"
-                                        class="btn btn-primary">
+                                        target="_blank" class="btn btn-primary">
                                         Contact Support
                                     </a>
                                 </td>
