@@ -21,8 +21,12 @@ class CheckoutController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Camp $camp)
+    public function create(Camp $camp, Request $request)
     {
+        if ($camp->isRegistered) {
+            $request->session()->flash('error', "You already registered on {$camp->title} camp.");
+            return redirect(route('dashboard'));
+        }
         return view('checkout.create', [
             'camp' => $camp
         ]);
@@ -40,8 +44,6 @@ class CheckoutController extends Controller
 
         // update user data
         $user = Auth::user();
-        // $user->email = $data['email'];
-        // $user->name = $data['name'];
         $user->occupation = $data['occupation'];
         $user->save();
 
