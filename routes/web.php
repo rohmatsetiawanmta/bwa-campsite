@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('checkout', function () {
-    return view('checkout');
-})->name('checkout');
-
-Route::get('success-checkout', function () {
-    return view('success-checkout');
-})->name('success-checkout');
+Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
+Route::post('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
 
 // Socialite route
 Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
